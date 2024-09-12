@@ -9,8 +9,8 @@ app = Flask(__name__)
 accelerator = Accelerator()
 
 # Load the fine-tuned model and tokenizer
-model = AutoModelForSeq2SeqLM.from_pretrained("./tests")
-tokenizer = AutoTokenizer.from_pretrained("./tests")
+model = AutoModelForSeq2SeqLM.from_pretrained("kewtieee/bartpho-syllable-finetuned-legal")
+tokenizer = AutoTokenizer.from_pretrained("kewtieee/bartpho-syllable-finetuned-legal")
 
 # Move model to device
 device = accelerator.device
@@ -40,6 +40,9 @@ def chat():
         answer = generate_answer(question)
         return jsonify({'answer': answer})
     return jsonify({'error': 'No question provided'}), 400
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
